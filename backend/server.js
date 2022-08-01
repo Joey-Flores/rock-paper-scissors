@@ -57,7 +57,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    // origin: "*",
+    origin: "https://rock-paper-scissors-game-final.herokuapp.com/",
     credentials: true,
   })
 );
