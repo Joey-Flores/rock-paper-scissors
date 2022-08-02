@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     createProxyMiddleware(
       ["/login", , "/logout", "/register", "/score", "/account"],
-      { target: "http://localhost:3000" }
+      { target: "https://evening-shore-30877.herokuapp.com/" }
     )
   );
 };

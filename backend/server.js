@@ -7,6 +7,7 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const MongoStore = require("connect-mongo");
+const path = require("path");
 const app = express();
 
 const User = require("./models/user");
@@ -57,7 +58,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://rock-paper-scissors-game-final.herokuapp.com/",
+    origin: "*",
     credentials: true,
   })
 );
@@ -76,6 +77,18 @@ app.use(
     },
   })
 );
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../build")));
+
+  app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("api running!");
+  });
+}
 
 app.use(cookieParser(secret));
 
