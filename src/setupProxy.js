@@ -11,7 +11,6 @@ module.exports = function (app) {
     "/",
     createProxyMiddleware({
       target: "https://evening-shore-30877.herokuapp.com/",
-      changeOrigin: true,
     })
   );
 };
